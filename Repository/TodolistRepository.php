@@ -36,17 +36,11 @@ namespace Repository {
 
         public function remove(int $number): bool
         {
-            if ($number > sizeof($this->todolist)) {
-                return false;
-            }
+            $sql = "DELETE FROM todolist WHERE id = ?";
+            $statement = $this->connection->prepare($sql);
+            $statement->execute([$number]);
 
-            for ($i = $number; $i < sizeof($this->todolist); $i++) {
-                $this->todolist[$i] = $this->todolist[$i + 1];
-            }
-
-            unset($this->todolist[sizeof($this->todolist)]);
-
-            return true;
+            return $statement->rowCount();
         }
 
         public function findAll(): array

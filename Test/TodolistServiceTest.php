@@ -39,21 +39,12 @@ function testAddTodolist()
 
 function testRemoveTodolist()
 {
-    $todolistRepository = new TodolistRepositoryImpl();
+    $connection = Database::getConnection();
+    $todolistRepository = new TodolistRepositoryImpl($connection);
 
     $todolistService = new TodolistServiceImpl($todolistRepository);
 
-    $todolistService->addTodolist("Belajar OOP");
-    $todolistService->addTodolist("Object Oriented Programming");
-    $todolistService->addTodolist("Membuat Aplikasi Todolist OOP");
-
-    $todolistService->showTodolist();
-
-    $todolistService->removeTodolist(1);
-    $todolistService->showTodolist();
-
-    $todolistService->removeTodolist(5);
-    $todolistService->showTodolist();
+    $todolistService->removeTodolist(4);
 }
 
-testAddTodolist();
+testRemoveTodolist();
