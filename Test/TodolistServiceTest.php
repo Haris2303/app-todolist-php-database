@@ -12,13 +12,12 @@ use Service\TodolistServiceImpl;
 
 function testShowTodolist()
 {
-    $todolistRepository = new TodolistRepositoryImpl();
-
-    $todolistRepository->todolist[] = new Todolist("Belajar OOP");
-    $todolistRepository->todolist[] = new Todolist("Membuat Aplikasi Todolist");
-    $todolistRepository->todolist[] = new Todolist("Object Oriented Programming");
+    $connection = Database::getConnection();
+    $todolistRepository = new TodolistRepositoryImpl($connection);
 
     $todolistService = new TodolistServiceImpl($todolistRepository);
+
+    $todolistService->addTodolist("Belajar PHP Database mysql PDO");
 
     $todolistService->showTodolist();
 }
@@ -47,4 +46,4 @@ function testRemoveTodolist()
     $todolistService->removeTodolist(4);
 }
 
-testRemoveTodolist();
+testShowTodolist();
